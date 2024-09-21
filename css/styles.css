@@ -1,0 +1,64 @@
+*, *::before, *::after {
+    box-sizing: inherit;
+}
+
+html {
+    box-sizing: border-box;
+    font-size: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.5rem;
+
+
+
+
+}
+
+body {
+    background-color: grey;
+    max-width: 1000px;
+    margin: 0 auto;
+    background-image: url(/img/like7.jpg);
+}
+h1 {
+    color:red;
+    background-color: yellow;
+    line-height: 3rem;
+    margin-left: 0.5rem;
+}
+
+.new-color {
+    color: blue;
+}
+
+.standard-box {
+
+    background-color: pink;
+    width: 300px;
+    padding: 30px;
+    border: 20px solid green;
+    margin: 30px;
+    box-sizing: content-box;
+}
+
+.border-box {
+    background-color: pink;
+    width: 300px;
+    padding: 30px;
+    border: 20px solid green;
+    margin: 30px;
+    box-sizing: border-box;
+}
+
+p {
+    margin-left: 0.5rem;
+}
+
+a :hover {
+    color: blueviolet;
+    text-decoration: underline;
+}
+
+img {
+    width: 100%;
+    height: auto;
+}
