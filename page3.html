@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title> Page 3 </title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="css/reg.css">
 </head>
 <body>
     <header>
@@ -23,13 +23,14 @@
     <div class="title">Registration</div>
     <div class="content">
       <!-- Registration form -->
-      <form action="#">
+      <form action="https://api.web3forms.com/submit" method="post">
         <div class="user-details">
           <!-- Input for Full Name -->
           <div class="input-box">
             <span class="details">Full Name</span>
             <input type="text" placeholder="Enter your name" required>
           </div>
+          <input type="hidden" name="access_key" value="2d91e2fe-f01b-4f13-812c-33346e7a1d61">
           <!-- Input for Username ****changeing this to ADRESSSSSS -->
           <div class="input-box">
             <span class="details">Adress</span>
@@ -50,6 +51,10 @@
             <span class="details">Message</span>
             <input type="text" placeholder="Enter your password" required>
           </div>
+          <div class="input-box"></div>
+            <span class="details"> Security Question: How many points is this assignment worth?</span>
+            <input type="text" placeholder="Security Question" required>
+          </div>
           <!-- Input for Confirm Password HAS BEEN DELETED HERE-->
 
         </div>
@@ -61,25 +66,28 @@
     </div>
         </div>
 
-        <!--adding the year submit for a youtube video -->
-        <form>
-          <span>
+        <!--adding the year submit for a youtube video COME BACK HERE  CHANGING FROM SPAN TO DIV-->
+    
+          <div>
               <label for="day">Day:</label>
               <select name="day" id="day"></select>
-          </span>
-          <span>
+          </div>
+          <div>
               <label for="month">Month:</label>
               <select name="month" id="month"></select>
-          </span>
-          <span>
+          </div>
+          <div>
               <label for="year">Year:</label>
               <select name="year" id="year">Year:</select>
         <!-- Submit button -->
         <div class="button">
           <input type="submit" value="Register">
         </div>
+        <!-- adding a subject line here HERE-->
       </form>
     </div>
   </div>
+
+  <script src="css/script.js"> </script>
 </body>
 </html>
