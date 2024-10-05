@@ -1,0 +1,119 @@
+
+.standard-box {
+
+    background-color: pink;
+    width: 300px;
+    padding: 30px;
+    border: 20px solid green;
+    margin: 30px;
+    box-sizing: content-box;
+}
+
+.border-box {
+    background-color: pink;
+    width: 300px;
+    padding: 30px;
+    border: 20px solid green;
+    margin: 30px;
+    box-sizing: border-box;
+}
+
+p {
+    margin-left: 0.5rem;
+}
+
+a :hover {
+    color: blueviolet;
+    text-decoration: underline;
+}
+
+img {
+    width: 100%;
+    height: auto;
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+    font-family: monospace;
+    list-style: none;
+    background: #22438c;
+}
+
+ul li {
+    display: inline-block;
+    position: relative;
+}
+
+ul li a {
+    display: block;
+    padding: 20px 25px;
+    color: #fff;
+    text-decoration: none;
+    text-align: center;
+    font-size: 20px;
+
+
+    
+}
+
+ul li ul.dropdown li {
+    display: block;
+}
+
+ul li ul.dropdown {
+    width: 100%;
+    background: #22438c;
+    position: absolute;
+    z-index: 999;
+    display: none;
+
+}
+
+ul li a:hover {
+    background: 112c66;
+
+}
+
+ul li:hover ul.dropdown {
+    display: block;
+}
+body {
+   
+    background: linear-gradient(135deg, #71b7e6, #9b59b6);
+    /* adding these two items */
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+
+
+/* adding some from prev assignment above */
+
+
+#loancal {
+    width: 375px;
+    height: 295px;
+    background-color: #000;
+    color: white;
+    margin-left: 275px;
+    margin-top: 95px;
+    padding-left: 90px;
+    padding-top: 20px;
+}
+
+#months, #amount, #interest_rate {
+
+    width: 175px;
+    height: 20px;
+}
+
+#interest_rate {
+
+    margin-left: 2px;
+}
+
+h1 {
+
+    font-size: 40px;
+}
