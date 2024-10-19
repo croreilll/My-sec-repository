@@ -2,13 +2,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE-edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mortgage Loan Calculator</title>
+    <title>Loan Calculator</title>
     <link rel="stylesheet" href="css/part4.css">
-    <script src="css/apps.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        canvas {
+            max-width: 600px;
+            margin: 20px auto;
+        }
+    </style>
 </head>
-<body> 
+<body>
+
+ 
         <!--adding my header-->
         <header>
             <nav>
@@ -49,16 +56,61 @@
                 </ul>
             </nav>
         </header>
-          
-    <div id="loancal"> 
-        <h1>Loan Calculator</h1>
-        <p>Loan Amount: $<input type="number" id="amount" min="1" max="5000000" onchange="computeLoan()"></p>
 
-        <p>Interest Rate: %<input id="interest_rate" min="0" max="100" value="10" step=".1" onchange="computeLoan()"></p>
-
-        <p>Months to Pay: <input type="number" id="months" min="1" max="300" value="1" step="1" onchange="computeLoan()"></p>
-
-        <h2 id="payment"></h2>
+<div id="loancal"> 
+    <h1>Loan Calculator</h1>
+    <p>Loan Amount: $<input type="number" id="amount" min="1" max="5000000" onchange="computeLoan()"></p>
+    <p>Interest Rate: %<input id="interest_rate" min="0" max="100" value="10" step=".1" onchange="computeLoan()"></p>
+    <p>Months to Pay: <input type="number" id="months" min="1" max="300" value="1" step="1" onchange="computeLoan()"></p>
+    <h2 id="payment"></h2>
 </div>
+
+<canvas id="loanChart"></canvas>
+
+<script>
+    // Function to compute the loan payment and update the chart
+    function computeLoan() {
+        const amount = parseFloat(document.getElementById('amount').value);
+        const interestRate = parseFloat(document.getElementById('interest_rate').value) / 100 / 12; // Monthly interest
+        const months = parseInt(document.getElementById('months').value);
+
+        if (!isNaN(amount) && !isNaN(interestRate) && !isNaN(months)) {
+            const payment = (amount * interestRate) / (1 - Math.pow(1 + interestRate, -months));
+            document.getElementById('payment').innerText = `Monthly Payment: $${payment.toFixed(2)}`;
+
+            updateChart(payment);
+        }
+    }
+
+    // Initialize the chart
+    const ctx = document.getElementById('loanChart').getContext('2d');
+    let loanChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Monthly Payment'],
+            datasets: [{
+                label: 'Payment Amount',
+                data: [0], // Initial value
+                backgroundColor: ['rgba(75, 192, 192, 0.2)'],
+                borderColor: ['rgba(75, 192, 192, 1)'],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    // Function to update the chart
+    function updateChart(payment) {
+        loanChart.data.datasets[0].data[0] = payment; // Update the payment amount
+        loanChart.update(); // Refresh the chart
+    }
+</script>
+
 </body>
 </html>
