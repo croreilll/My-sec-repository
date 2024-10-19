@@ -1,53 +1,143 @@
-
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.js"> </script>-->
-
-
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>5</title>
-    <link rel="stylesheet" href="css/styles.css">
-
-    <script src="5script.js"></script>
+    <link rel="stylesheet" href="css/part4.css">
+    <title>Spirophgraph Animation</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px;
+        }
+        canvas {
+            border: 1px solid black;
+            background-color: #f0f0f0;
+            margin-top: 20px;
+        }
+        input {
+            margin: 5px;
+        }
+    </style>
 </head>
-
 <body>
     <header>
         <nav>
             <ul>
                 <li><a href="index.html">Home</a></li>
-                <li><a href="COP_4813.html"> COP 4813</a></li>
+                
+                <li>
+                    <a href="#">My Classes</a>  <!----taking out li-->
+                <ul class="dropdown">
+                    <li><a href="COP4813.html">COP4813</a></li>
+                    <li><a href="COPHOLDER.html">COP1212</a></li>
+                </ul>
+                </li>
+
+
+                <li>
+                    <a href="#">Assignments</a> <!---- taking out an li -->
+                <ul class="dropdown">
+                    <li><a href="page1.html">Assignment 1</a></li>
+                    <li><a href="page2.html">Assignment 2</a></li>
+                    <li><a href="page3.html">Assignment 3</a></li>
+                    <li><a href="page4.html">Assignment 4</a></li>
+                    <li><a href="page5.html">Assignment 5</a></li>
+                    <li><a href="page6.html">Assignment 6</a></li>
+                    <li><a href="page7.html">Assignment 7</a></li>
+                    <li><a href="page8.html">Assignment 8</a></li>
+                    <li><a href="page9.html">Assignment 9</a></li>
+                    <li><a href="page10.html">Assignment 10</a></li>
+                    <li><a href="page11.html">Assignment 11</a></li>
+                    <li><a href="page12.html">Assignment 12</a></li>
+                    <li><a href="page13.html">Assignment 13</a></li>
+                    <li><a href="page14.html">Assignment 14</a></li>
+                    <li><a href="page15.html">Assignment 15</a></li>
+            
+                </ul>
+                </li>
+
             </ul>
         </nav>
     </header>
 
-    <!-- spirograph start -->
+<h1>Spirophgraph Animation</h1>
+<label for="R">Radius of Large Circle (R):</label>
+<input type="number" id="R" value="100" min="1"><br>
 
-    <!-- user input -->
-    <p1>
-        R (Outer Radius):<br>
-        <input id="R" name="R" type="text" value="100"><br>
+<label for="r">Radius of Small Circle (r):</label>
+<input type="number" id="r" value="50" min="1"><br>
 
-        r (Inner Radius):<br>
-        <input id="r" name="r" type="text" value="1"><br>
+<label for="O">Offset (O):</label>
+<input type="number" id="O" value="0" min="0"><br>
 
-        O (Offset):<br>
-        <input id="O" name="O" type="text" value="60"><br>
-    </p1>
+<button onclick="startSpiro()">Start Drawing</button>
 
-    <!-- spirograph button and canvas -->
-    <button onclick="startSpiro();">Draw Spirograph</button>
-    <br /><br />
-    <canvas id="myCanvas" width="600" height="600" style="border:3px solid black;"></canvas>
+<canvas id="myCanvas" width="600" height="600"></canvas>
 
+<script>
+    var t = 0; // angle in radians
+    var prevX = null;
+    var prevY = null;
+    var animationId; // animation id frame
 
-    <footer>
-        <p>Copyright &copy; Cristian O'Reilly </p>
-    </footer>
+    // Start the spirograph drawing
+    function startSpiro() {
+        // values from user input
+        let R = parseFloat(document.getElementById("R").value);
+        let r = parseFloat(document.getElementById("r").value);
+        let O = parseFloat(document.getElementById("O").value);
+
+        var c = document.getElementById("myCanvas");
+        var ctx = c.getContext("2d");
+        ctx.clearRect(0, 0, c.width, c.height); // clear the canvas
+        ctx.strokeStyle = "blue"; // color
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
+        ctx.translate(c.width / 2, c.height / 2); // center the drawing
+
+        prevX = null;
+        prevY = null;
+        t = 0;
+
+        if (animationId) {
+            cancelAnimationFrame(animationId);
+        }
+
+        // Start the drawing animation
+        drawSpiro(ctx, R, r, O);
+    }
+
+    // Function to animate the spirograph
+    function drawSpiro(ctx, R, r, O) {
+        // spirograph equations
+        var x = (R + r) * Math.cos(t) - (r + O) * Math.cos(((R + r) / r) * t);
+        var y = (R + r) * Math.sin(t) - (r + O) * Math.sin(((R + r) / r) * t);
+
+        if (prevX !== null && prevY !== null) {
+            ctx.beginPath();
+            ctx.moveTo(prevX, prevY);
+            ctx.lineTo(x, y);
+            ctx.stroke();
+        }
+
+        prevX = x;
+        prevY = y;
+
+        // Increment the angle
+        t += 0.01;
+
+        // Continue animating until a certain condition is met
+        if (t < 20) {
+            animationId = requestAnimationFrame(function () {
+                drawSpiro(ctx, R, r, O);
+            });
+        } else {
+            cancelAnimationFrame(animationId); // stop animation
+        }
+    }
+</script>
+
 </body>
-
 </html>

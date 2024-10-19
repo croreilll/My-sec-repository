@@ -1,0 +1,53 @@
+
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.js"> </script>-->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5</title>
+    <link rel="stylesheet" href="css/styles.css">
+
+    <script src="5script.js"></script>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="COP_4813.html"> COP 4813</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- spirograph start -->
+
+    <!-- user input -->
+    <p1>
+        R (Outer Radius):<br>
+        <input id="R" name="R" type="text" value="100"><br>
+
+        r (Inner Radius):<br>
+        <input id="r" name="r" type="text" value="1"><br>
+
+        O (Offset):<br>
+        <input id="O" name="O" type="text" value="60"><br>
+    </p1>
+
+    <!-- spirograph button and canvas -->
+    <button onclick="startSpiro();">Draw Spirograph</button>
+    <br /><br />
+    <canvas id="myCanvas" width="600" height="600" style="border:3px solid black;"></canvas>
+
+
+    <footer>
+        <p>Copyright &copy; Cristian O'Reilly </p>
+    </footer>
+</body>
+
+</html>
