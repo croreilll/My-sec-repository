@@ -1,0 +1,81 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>6</title>
+    <link rel="stylesheet" href="external_css/styles.css">
+
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="COP_4813.html"> COP 4813</a></li>
+            </ul>
+        </nav>
+        <!-- note about what I did and what it is about -->
+    </header>
+    <h3> Most Muay Thai Wins <br></h3>
+    <p1>I created a json file for the most Muay Thai .<br>
+        This is the most professional wins  <br>
+        blah blah <br>
+        blah <br><br>
+    </p1>
+
+    <!-- creates table from myjson file -->
+    <table border="1" id="fantasy-table">
+        <thead>
+            <tr>
+                <th>Fighter</th>
+                <th>Wins</th>
+                <th>Losses</th>
+                <th>Draw</th>
+                <th>Belts</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    <!-- javascript to get data -->
+    <script type="text/javascript">
+        //  gets json file
+        fetch('myjson.json')
+            .then(response => response.json())  // parse json points
+            .then(fantasy => {
+                let tableBody = document.querySelector("#fantasy-table tbody");
+
+                // loop for json file
+                fantasy.forEach(function (player) {
+                    let row = document.createElement("tr");
+
+                    row.innerHTML = `
+                    <td>${player.player}</td>
+                    <td>${player.team}</td>
+                    <td>${player.position}</td>
+                    <td>${player.projected}</td>
+                    <td>${player.earned !== null ? player.earned : "N/A"}</td>
+                `;
+
+                    // append the row
+                    tableBody.appendChild(row);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching the JSON file:', error);
+            });
+    </script>
+
+    </p1>
+
+    <footer>
+        <p>Copyright &copy; Gerardo Galarza</p>
+    </footer>
+
+</body>
+
+</html>

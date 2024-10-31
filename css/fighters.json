@@ -1,0 +1,30 @@
+[
+   {
+       "name": "Saenchai",
+       "wins": 305,
+       "losses": 65,
+       "draws": 4,
+       "division": "Lightweight"
+   },
+   {
+       "name": "Buakaw Banchamek",
+       "wins": 240,
+       "losses": 24,
+       "draws": 12,
+       "division": "Welterweight"
+   },
+   {
+       "name": "Yodsanklai Fairtex",
+       "wins": 200,
+       "losses": 50,
+       "draws": 2,
+       "division": "Middleweight"
+   },
+   {
+       "name": "Petchboonchu FA Group",
+       "wins": 200,
+       "losses": 30,
+       "draws": 1,
+       "division": "Featherweight"
+   }
+]

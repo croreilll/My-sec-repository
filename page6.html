@@ -1,64 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE-edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mortgage Loan Calculator</title>
-    <link rel="stylesheet" href="css/part4.css">
-    <script src="css/apps.js" defer></script>
+    <title>Thai Fighters - Most Wins</title>
+    <link rel="stylesheet" href="external_css/styles.css">
 </head>
-<body> 
-        <!--adding my header-->
-        <header>
-            <nav>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    
-                    <li>
-                        <a href="#">My Classes</a>  <!----taking out li-->
-                    <ul class="dropdown">
-                        <li><a href="COP4813.html">COP4813</a></li>
-                        <li><a href="COPHOLDER.html">COP1212</a></li>
-                    </ul>
-                    </li>
-    
-    
-                    <li>
-                        <a href="#">Assignments</a> <!---- taking out an li -->
-                    <ul class="dropdown">
-                        <li><a href="page1.html">Assignment 1</a></li>
-                        <li><a href="page2.html">Assignment 2</a></li>
-                        <li><a href="page3.html">Assignment 3</a></li>
-                        <li><a href="page4.html">Assignment 4</a></li>
-                        <li><a href="page5.html">Assignment 5</a></li>
-                        <li><a href="page6.html">Assignment 6</a></li>
-                        <li><a href="page7.html">Assignment 7</a></li>
-                        <li><a href="page8.html">Assignment 8</a></li>
-                        <li><a href="page9.html">Assignment 9</a></li>
-                        <li><a href="page10.html">Assignment 10</a></li>
-                        <li><a href="page11.html">Assignment 11</a></li>
-                        <li><a href="page12.html">Assignment 12</a></li>
-                        <li><a href="page13.html">Assignment 13</a></li>
-                        <li><a href="page14.html">Assignment 14</a></li>
-                        <li><a href="page15.html">Assignment 15</a></li>
-                
-                    </ul>
-                    </li>
-    
-                </ul>
-            </nav>
-        </header>
-          
-    <div id="loancal"> 
-        <h1>Loan Calculator</h1>
-        <p>Loan Amount: $<input type="number" id="amount" min="1" max="5000000" onchange="computeLoan()"></p>
 
-        <p>Interest Rate: %<input id="interest_rate" min="0" max="100" value="10" step=".1" onchange="computeLoan()"></p>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="fighters.html">Thai Fighters</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <h3>Top Thai Fighters by Wins</h3>
+    <p>I created a JSON file to display the records of top Thai fighters and their total wins.<br>
+        This information is important to highlight the achievements of these athletes in the fighting sports community.<br>
+        Please refer to the table below for details.<br><br>
+    </p>
 
-        <p>Months to Pay: <input type="number" id="months" min="1" max="300" value="1" step="1" onchange="computeLoan()"></p>
+    <!-- creates table from fighters.json file -->
+    <table border="1" id="fighters-table">
+        <thead>
+            <tr>
+                <th>Fighter</th>
+                <th>Wins</th>
+                <th>Losses</th>
+                <th>Draws</th>
+                <th>Division</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    
+    <!-- javascript to get data -->
+    <script type="text/javascript">
+        //  gets json file
+        fetch('fighters.json')
+            .then(response => response.json())  // parse json points
+            .then(fighters => {
+                let tableBody = document.querySelector("#fighters-table tbody");
 
-        <h2 id="payment"></h2>
-</div>
+                // loop for json file
+                fighters.forEach(function (fighter) {
+                    let row = document.createElement("tr");
+
+                    row.innerHTML = `
+                    <td>${fighter.name}</td>
+                    <td>${fighter.wins}</td>
+                    <td>${fighter.losses}</td>
+                    <td>${fighter.draws}</td>
+                    <td>${fighter.division}</td>
+                `;
+
+                    // append the row
+                    tableBody.appendChild(row);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching the JSON file:', error);
+            });
+    </script>
+
+    <footer>
+        <p>Copyright &copy; Your Name</p>
+    </footer>
+
 </body>
+
 </html>
