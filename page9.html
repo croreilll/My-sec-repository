@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/part4.css">
+    <title>Bouncing Object Animation</title>
+    <style>
+        canvas {
+            border: 1px solid black;
+            display: block;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+
+
+    <body>
+        <header>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    
+                    <li>
+                        <a href="#">My Classes</a>  <!----taking out li-->
+                    <ul class="dropdown">
+                        <li><a href="COP4813.html">COP4813</a></li>
+                        <li><a href="COPHOLDER.html">COP1212</a></li>
+                    </ul>
+                    </li>
+    
+    
+                    <li>
+                        <a href="#">Assignments</a> <!---- taking out an li -->
+                    <ul class="dropdown">
+                        <li><a href="page1.html">Assignment 1</a></li>
+                        <li><a href="page2.html">Assignment 2</a></li>
+                        <li><a href="page3.html">Assignment 3</a></li>
+                        <li><a href="page4.html">Assignment 4</a></li>
+                        <li><a href="page5.html">Assignment 5</a></li>
+                        <li><a href="page6.html">Assignment 6</a></li>
+                        <li><a href="page7.html">Assignment 7</a></li>
+                        <li><a href="page8.html">Assignment 8</a></li>
+                        <li><a href="page9.html">Assignment 9</a></li>
+                        <li><a href="page10.html">Assignment 10</a></li>
+                        <li><a href="page11.html">Assignment 11</a></li>
+                        <li><a href="page12.html">Assignment 12</a></li>
+                        <li><a href="page13.html">Assignment 13</a></li>
+                        <li><a href="page14.html">Assignment 14</a></li>
+                        <li><a href="page15.html">Assignment 15</a></li>
+                
+                    </ul>
+                    </li>
+    
+                </ul>
+            </nav>
+        </header>
+
+
+    <canvas id="myCanvas" width="800" height="600"></canvas>
+    <script>
+        const canvas = document.getElementById('myCanvas');
+        const ctx = canvas.getContext('2d');
+
+        let rect = {
+            x: 50,
+            y: 50,
+            width: 50,
+            height: 50,
+            dx: 2,  // change in x (speed)
+            dy: 2,  // change in y (speed)
+            color: 'blue' // initial color
+        };
+
+        function drawRect() {
+            ctx.fillStyle = rect.color;
+            ctx.fillRect(rect.x, rect.y, rect.width, rect.height);
+        }
+
+        function clearCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+
+        function updateRectPosition() {
+            rect.x += rect.dx;
+            rect.y += rect.dy;
+
+            // Bounce off the walls
+            if (rect.x + rect.width > canvas.width || rect.x < 0) {
+                rect.dx = -rect.dx; // Reverse x direction
+                changeColor();
+            }
+            if (rect.y + rect.height > canvas.height || rect.y < 0) {
+                rect.dy = -rect.dy; // Reverse y direction
+                changeColor();
+            }
+        }
+
+        function changeColor() {
+            // Change to a random color
+            rect.color = '#' + Math.floor(Math.random()*16777215).toString(16);
+        }
+
+        function animate() {
+            clearCanvas();
+            drawRect();
+            updateRectPosition();
+            requestAnimationFrame(animate);
+        }
+
+        // Mouse click event
+        canvas.addEventListener('click', function(event) {
+            // Change direction
+            rect.dx = (Math.random() > 0.5 ? 1 : -1) * Math.random() * 5; // Random speed
+            rect.dy = (Math.random() > 0.5 ? 1 : -1) * Math.random() * 5; // Random speed
+            changeColor(); // Change color on click
+        });
+
+        // Start the animation
+        animate();
+    </script>
+</body>
+</html>
