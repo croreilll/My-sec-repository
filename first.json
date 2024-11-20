@@ -1,0 +1,26 @@
+[
+    {
+        "code": "COP2001",
+        "name": "Introduction to Programming",
+        "prerequisites": [],
+        "note": "This course is a prerequisite for many advanced programming classes."
+    },
+    {
+        "code": "COP2800",
+        "name": "Advanced Programming",
+        "prerequisites": ["COP2001"],
+        "note": "Must take COP2001 before enrolling."
+    },
+    {
+        "code": "COP3000",
+        "name": "Web Development",
+        "prerequisites": ["COP2001", "COP2800"],
+        "note": "Must take either COP2001 or COP2800 to enroll."
+    },
+    {
+        "code": "COP4900",
+        "name": "Capstone Project",
+        "prerequisites": ["COP3000"],
+        "note": "You must complete Web Development before taking this course."
+    }
+]

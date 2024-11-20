@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class Advising Tool</title>
+    <link rel="stylesheet" href="styles11.css">
+</head>
+<body>
+    <h1>Class Advising Tool</h1>
+    <div>
+        <h2>Enter Completed Classes</h2>
+        <select id="completedCourses" multiple>
+            <!-- Options will be populated by JavaScript -->
+        </select>
+    </div>
+    <button onclick="showAvailableClasses()">Show Available Classes</button>
+    <div id="availableClasses">
+        <h2>Available Classes</h2>
+        <ul id="classList"></ul>
+    </div>
+    <script src="class.js"></script>
+</body>
+</html>

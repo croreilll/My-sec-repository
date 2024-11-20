@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CMS Comparison</title>
+    <link rel="stylesheet" href="css/part4.css">
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                
+                <li>
+                    <a href="#">My Classes</a>  <!----taking out li-->
+                <ul class="dropdown">
+                    <li><a href="COP4813.html">COP4813</a></li>
+                    <li><a href="COPHOLDER.html">COP1212</a></li>
+                </ul>
+                </li>
+
+
+                <li>
+                    <a href="#">Assignments</a> <!---- taking out an li -->
+                <ul class="dropdown">
+                    <li><a href="page1.html">Assignment 1</a></li>
+                    <li><a href="page2.html">Assignment 2</a></li>
+                    <li><a href="page3.html">Assignment 3</a></li>
+                    <li><a href="page4.html">Assignment 4</a></li>
+                    <li><a href="page5.html">Assignment 5</a></li>
+                    <li><a href="page6.html">Assignment 6</a></li>
+                    <li><a href="page7.html">Assignment 7</a></li>
+                    <li><a href="page8.html">Assignment 8</a></li>
+                    <li><a href="page9.html">Assignment 9</a></li>
+                    <li><a href="page10.html">Assignment 10</a></li>
+                    <li><a href="page11.html">Assignment 11</a></li>
+                    <li><a href="page12.html">Assignment 12</a></li>
+                    <li><a href="page13.html">Assignment 13</a></li>
+                    <li><a href="page14.html">Assignment 14</a></li>
+                    <li><a href="page15.html">Assignment 15</a></li>
+            
+                </ul>
+                </li>
+
+            </ul>
+        </nav>
+    </header>
+
+    <h1>CMS Comparison</h1>
+
+    <table id="cms-table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Support</th>
+                <th>Technology</th>
+                <th>Capabilities</th>
+                <th>Limitations</th>
+                <th>Example Site</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Table rows will be dynamically added here -->
+        </tbody>
+    </table>
+
+    <script>
+        // Fetch the JSON data and render the table
+        fetch('cms_data.json')
+            .then(response => response.json())
+            .then(data => {
+                const tableBody = document.querySelector("#cms-table tbody");
+
+                data.cms.forEach(cms => {
+                    const row = document.createElement("tr");
+
+                    row.innerHTML = `
+                        <td>${cms.name}</td>
+                        <td>${cms.support}</td>
+                        <td>${cms.technology}</td>
+                        <td>${cms.capabilities}</td>
+                        <td>${cms.limitations}</td>
+                        <td><a href="${cms.example_site}" target="_blank">${cms.example_site}</a></td>
+                    `;
+                    
+                    tableBody.appendChild(row);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching JSON:', error);
+            });
+    </script>
+
+</body>
+</html>

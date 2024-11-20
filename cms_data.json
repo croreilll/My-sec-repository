@@ -1,0 +1,44 @@
+{
+    "cms": [
+      {
+        "name": "WordPress",
+        "support": "Open Source, Supported by most hosting companies",
+        "technology": "PHP/MySQL",
+        "capabilities": "Supports themes, Supports plugins, Public API",
+        "limitations": "Security (plugins), Security (updates)",
+        "example_site": "https://wordpress.org/"
+      },
+      {
+        "name": "Joomla",
+        "support": "Open Source",
+        "technology": "PHP/MySQL",
+        "capabilities": "Supports extensions, Content management flexibility",
+        "limitations": "Less user-friendly, Limited plugins compared to WordPress",
+        "example_site": "https://www.joomla.org/"
+      },
+      {
+        "name": "Drupal",
+        "support": "Open Source",
+        "technology": "PHP/MySQL",
+        "capabilities": "Highly customizable, Strong security features",
+        "limitations": "Steeper learning curve, Requires more technical expertise",
+        "example_site": "https://www.drupal.org/"
+      },
+      {
+        "name": "Wix",
+        "support": "Proprietary, Cloud-based",
+        "technology": "Cloud-based, JavaScript",
+        "capabilities": "Drag-and-drop interface, Custom templates, E-commerce",
+        "limitations": "Limited customization, Proprietary system",
+        "example_site": "https://www.wix.com/"
+      },
+      {
+        "name": "Shopify",
+        "support": "Proprietary, Paid",
+        "technology": "Ruby on Rails, Cloud-based",
+        "capabilities": "E-commerce focused, Payment gateway integration",
+        "limitations": "Monthly fees, Limited customization compared to open-source",
+        "example_site": "https://www.shopify.com/"
+      }
+    ]
+  }
