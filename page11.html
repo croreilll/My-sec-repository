@@ -1,24 +1,203 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/part4.css">
+  <title>Class Advising Tool</title>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Class Advising Tool</title>
-    <link rel="stylesheet" href="styles11.css">
-</head>
-<body>
+    <style>
+      .completed {
+        background-color: lightgreen;
+        text-decoration: line-through;
+      }
+      .unavailable {
+        background-color: lightcoral;
+      }
+      .available {
+        background-color: lightyellow;
+      }
+      .course-item {
+        padding: 8px;
+        margin: 5px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                
+                <li>
+                    <a href="#">My Classes</a>  <!----taking out li-->
+                <ul class="dropdown">
+                    <li><a href="COP4813.html">COP4813</a></li>
+                    <li><a href="COPHOLDER.html">COP1212</a></li>
+                </ul>
+                </li>
+
+
+                <li>
+                    <a href="#">Assignments</a> <!---- taking out an li -->
+                <ul class="dropdown">
+                    <li><a href="page1.html">Assignment 1</a></li>
+                    <li><a href="page2.html">Assignment 2</a></li>
+                    <li><a href="page3.html">Assignment 3</a></li>
+                    <li><a href="page4.html">Assignment 4</a></li>
+                    <li><a href="page5.html">Assignment 5</a></li>
+                    <li><a href="page6.html">Assignment 6</a></li>
+                    <li><a href="page7.html">Assignment 7</a></li>
+                    <li><a href="page8.html">Assignment 8</a></li>
+                    <li><a href="page9.html">Assignment 9</a></li>
+                    <li><a href="page10.html">Assignment 10</a></li>
+                    <li><a href="page11.html">Assignment 11</a></li>
+                    <li><a href="page12.html">Assignment 12</a></li>
+                    <li><a href="page13.html">Assignment 13</a></li>
+                    <li><a href="page14.html">Assignment 14</a></li>
+                    <li><a href="page15.html">Assignment 15</a></li>
+            
+                </ul>
+                </li>
+
+            </ul>
+        </nav>
+    </header>
     <h1>Class Advising Tool</h1>
-    <div>
-        <h2>Enter Completed Classes</h2>
-        <select id="completedCourses" multiple>
-            <!-- Options will be populated by JavaScript -->
-        </select>
-    </div>
-    <button onclick="showAvailableClasses()">Show Available Classes</button>
-    <div id="availableClasses">
-        <h2>Available Classes</h2>
-        <ul id="classList"></ul>
-    </div>
-    <script src="class.js"></script>
-</body>
-</html>
+  
+    <h2>Enter the courses you have completed</h2>
+  
+    <h3>Available Courses:</h3>
+    <div id="coursesList"></div>
+  
+    <button id="getSuggestionsBtn">Get Suggested Courses</button>
+  
+    <h3>Suggested Courses:</h3>
+    <ul id="suggestedCoursesList"></ul>
+  
+    <script>
+      // Define the program courses and their prerequisites
+      const programCourses = {
+        "ENC1101": { name: "Introduction to Composition", credits: 3, prerequisites: [] },
+        "MAC1105": { name: "College Algebra", credits: 3, prerequisites: [] },
+        "MGF2130": { name: "Mathematical Thinking", credits: 3, prerequisites: [] },
+        "STA2023": { name: "Elementary Statistics", credits: 3, prerequisites: [] },
+        "SLS1122": { name: "Managing Your Success", credits: 3, prerequisites: [] },
+        "ENC1102": { name: "Writing with Research", credits: 3, prerequisites: ["ENC1101"] },
+        "SPC2608": { name: "Oral Communications/Research/Presentation Skills", credits: 3, prerequisites: [] },
+        "AMH2010": { name: "U.S. History to 1877", credits: 3, prerequisites: [] },
+        "AMH2020": { name: "U.S. History since 1877", credits: 3, prerequisites: [] },
+        "POS2041": { name: "American Government", credits: 3, prerequisites: [] },
+        "Humanities_Core": { name: "Humanities Core", credits: 3, prerequisites: [] },
+        "Natural_Sciences_Core": { name: "Natural Sciences Core", credits: 3, prerequisites: [] }
+      };
+  
+      // Array to hold completed courses
+      let completedCourses = [];
+  
+      // Function to create checkboxes for all courses
+      function createCoursesList() {
+        const list = document.getElementById("coursesList");
+        list.innerHTML = ''; // Clear previous list
+  
+        for (let courseCode in programCourses) {
+          const course = programCourses[courseCode];
+          
+          // Create a checkbox for each course
+          const checkbox = document.createElement("input");
+          checkbox.type = "checkbox";
+          checkbox.id = courseCode;
+          checkbox.value = courseCode;
+          checkbox.addEventListener('change', () => {
+            toggleCourseCompletion(courseCode, checkbox.checked);
+          });
+  
+          const label = document.createElement("label");
+          label.setAttribute('for', courseCode);
+          label.textContent = `${course.name} (${courseCode})`;
+  
+          const courseItem = document.createElement("div");
+          courseItem.classList.add("course-item");
+          courseItem.appendChild(checkbox);
+          courseItem.appendChild(label);
+          
+          // Set the styling based on completion status and availability
+          if (completedCourses.includes(courseCode)) {
+            courseItem.classList.add("completed");
+            checkbox.checked = true; // Automatically check completed courses
+          } else if (!canTakeCourse(courseCode)) {
+            courseItem.classList.add("unavailable");
+          } else {
+            courseItem.classList.add("available");
+          }
+  
+          list.appendChild(courseItem);
+        }
+      }
+  
+      // Function to check if prerequisites are met for a course
+      function canTakeCourse(courseCode) {
+        const course = programCourses[courseCode];
+        for (let prereq of course.prerequisites) {
+          if (!completedCourses.includes(prereq)) {
+            return false; // If any prerequisite is missing, return false
+          }
+        }
+        return true; // All prerequisites are met
+      }
+  
+      // Toggle course completion status
+      function toggleCourseCompletion(courseCode, isChecked) {
+        if (isChecked) {
+          completedCourses.push(courseCode);
+        } else {
+          completedCourses = completedCourses.filter(course => course !== courseCode);
+        }
+  
+        createCoursesList(); // Re-render the courses list with updated status
+      }
+  
+      // Suggest courses the user can take next
+      function suggestCourses() {
+        const suggestedCourses = [];
+        for (let courseCode in programCourses) {
+          if (!completedCourses.includes(courseCode) && canTakeCourse(courseCode)) {
+            suggestedCourses.push(courseCode);
+          }
+        }
+        displaySuggestedCourses(suggestedCourses);
+      }
+  
+      // Display suggested courses
+      function displaySuggestedCourses(suggestedCourses) {
+        const list = document.getElementById("suggestedCoursesList");
+        list.innerHTML = '';
+        if (suggestedCourses.length === 0) {
+          const listItem = document.createElement("li");
+          listItem.textContent = "No available courses to suggest.";
+          list.appendChild(listItem);
+          return;
+        }
+  
+        suggestedCourses.forEach(courseCode => {
+          const listItem = document.createElement("li");
+          listItem.textContent = `${programCourses[courseCode].name} (${courseCode}) - Credits: ${programCourses[courseCode].credits}`;
+          list.appendChild(listItem);
+        });
+      }
+  
+      // Add event listener for the "Get Suggested Courses" button
+      document.getElementById("getSuggestionsBtn").addEventListener("click", function () {
+        suggestCourses();
+      });
+  
+      // Initial setup
+      createCoursesList();
+    </script>
+  </body>
+  </html>
